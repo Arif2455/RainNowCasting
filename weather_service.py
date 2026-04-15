@@ -52,7 +52,11 @@ def get_weather_data(city_name):
             return cached_data
             
     try:
-        url = f"{WEATHER_URL}?q={requests.utils.quote(city_name)},IN&appid={OPENWEATHER_API_KEY}&units=metric"
+        # Use a more flexible query to handle variations (e.g., city, state, IN)
+        # We try city name with country code first
+        query = f"{requests.utils.quote(city_name)},IN"
+        url = f"{WEATHER_URL}?q={query}&appid={OPENWEATHER_API_KEY}&units=metric"
+        print(f"Fetching weather for {city_name} via {url}")
         response = requests.get(url, timeout=10)
         
         if response.status_code == 200:
@@ -78,17 +82,44 @@ def get_weather_data(city_name):
             # Update cache
             _WEATHER_CACHE[city_name] = (weather_info, current_time)
             return weather_info
-        elif response.status_code == 401:
-            print(f"Weather API Error: 401 - Invalid API Key. Please check OPENWEATHER_API_KEY in src/config.py")
-            return None
         elif response.status_code == 404:
-            print(f"Weather API Error: 404 - City '{city_name}' not found in India.")
+            # If city,IN fails, try just city name
+            print(f"City,IN failed for {city_name}. Retrying with just city name...")
+            url_retry = f"{WEATHER_URL}?q={requests.utils.quote(city_name)}&appid={OPENWEATHER_API_KEY}&units=metric"
+            response_retry = requests.get(url_retry, timeout=10)
+            if response_retry.status_code == 200:
+                data = response_retry.json()
+                main = data.get("main", {})
+                wind = data.get("wind", {})
+                clouds = data.get("clouds", {})
+                weather = data.get("weather", [{}])[0]
+                coord = data.get("coord", {})
+                
+                weather_info = {
+                    "temp": main.get("temp", 0),
+                    "humidity": main.get("humidity", 0),
+                    "pressure": main.get("pressure", 0),
+                    "wind_speed": wind.get("speed", 0),
+                    "clouds": clouds.get("all", 0),
+                    "description": weather.get("description", "N/A").capitalize(),
+                    "city": data.get("name", city_name),
+                    "lat": coord.get("lat", 0),
+                    "lon": coord.get("lon", 0),
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+                _WEATHER_CACHE[city_name] = (weather_info, current_time)
+                return weather_info
+            else:
+                print(f"Weather API Error: 404 - City '{city_name}' not found.")
+                return None
+        elif response.status_code == 401:
+            print(f"Weather API Error: 401 - Invalid API Key.")
             return None
         elif response.status_code == 429:
-            print("Rate limit exceeded for OpenWeatherMap API.")
+            print("Rate limit exceeded.")
             return None
         else:
-            print(f"Weather API Error: {response.status_code} - {response.text}")
+            print(f"Weather API Error: {response.status_code}")
             return None
     except Exception as e:
         print(f"Error fetching weather for {city_name}: {e}")

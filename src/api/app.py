@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')
 from location_service import get_states, get_cities_by_state, search_city, validate_city
 from weather_service import get_weather_data, map_weather_to_features
 
-from src.utils.nowcast_engine import get_realtime_weather, nowcast_rainfall
+from src.utils.nowcast_engine import nowcast_rainfall
 from src.utils.geocoding import get_location_features
 from src.models.predictor import RainfallPredictor
 from src.data.data_loader import load_and_merge_data, get_recent_context
@@ -120,7 +120,7 @@ def process_nowcast(subdivision):
         
     city = CITY_MAPPING[sub_upper]
     try:
-        weather = get_realtime_weather(city)
+        weather = get_weather_data(city)
         if not weather:
             logger.error(f"Weather API fetch failed for city: {city}")
             return None, "Weather API is currently unreachable", 503
@@ -276,7 +276,7 @@ def nowcast_live():
     else:
         city = location
         
-    weather = get_realtime_weather(city)
+    weather = get_weather_data(city)
     
     if not weather:
         logger.error(f"Live data fetch failed for {city}")
