@@ -99,7 +99,7 @@ def nowcast_rainfall(weather_data):
     elif probability > 20:
         intensity = "Light Drizzle"
     else:
-        intensity = "Dry"
+        intensity = "Rain"
         
     return {
         "probability": f"{probability}%",
