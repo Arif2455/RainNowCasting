@@ -19,7 +19,26 @@ PLOTS_DIR = os.path.join(STATIC_DIR, 'plots')
 METRICS_PATH = os.path.join(STATIC_DIR, 'metrics.json')
 
 # API Settings
-OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "your_api_key_here")
+def get_api_key():
+    # 1. Try environment variable
+    key = os.getenv("OPENWEATHER_API_KEY")
+    if key and key != "your_api_key_here":
+        return key
+    
+    # 2. Try .env file manually (if python-dotenv is not installed)
+    env_path = os.path.join(BASE_DIR, ".env")
+    if os.path.exists(env_path):
+        try:
+            with open(env_path, "r") as f:
+                for line in f:
+                    if line.startswith("OPENWEATHER_API_KEY="):
+                        return line.split("=")[1].strip()
+        except Exception:
+            pass
+            
+    return "your_api_key_here"
+
+OPENWEATHER_API_KEY = get_api_key()
 DEFAULT_CITY = "Nagpur"
 
 # Logging Settings

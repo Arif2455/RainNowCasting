@@ -1,2 +1,7 @@
 env
 model.pkl
+.env
+__pycache__/
+*.pyc
+logs/
+*.csv
