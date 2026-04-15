@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Rainfall Nowcasting | Real-Time Weather</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .container {
+      max-width: 700px;
+    }
+
+    .main-title {
+      color: white;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 30px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card-header-custom {
+      background: #f8f9fa;
+      border-bottom: 1px solid #eee;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .card-header-custom h5 {
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #1e3c72;
+    }
+
+    .card-body {
+      padding: 40px;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      border-radius: 12px;
+      padding: 12px 15px;
+      height: auto;
+      border: 2px solid #eef0f5;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #2a5298;
+      box-shadow: none;
+      background: #fff;
+    }
+
+    .btn-predict {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: white;
+      box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-predict:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+      background: linear-gradient(to right, #2a5298, #1e3c72);
+      color: white;
+    }
+
+    .btn-predict:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-predict:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    #resultArea {
+      margin-top: 30px;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      background: white;
+    }
+
+    .result-header {
+      background: #1e3c72;
+      color: white;
+      border-radius: 15px 15px 0 0;
+      padding: 15px;
+      font-weight: 600;
+    }
+
+    .weather-info-box {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      background: #f0f4f8;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .weather-item {
+      text-align: center;
+    }
+
+    .weather-item i {
+      font-size: 1.5rem;
+      color: #2a5298;
+      margin-bottom: 8px;
+    }
+
+    .weather-item div:first-child {
+      font-size: 0.8rem;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .weather-item div:last-child {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .nowcast-box {
+      border-radius: 12px;
+      padding: 20px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .nowcast-box i {
+      font-size: 1.8rem;
+    }
+
+    .footer-text {
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* Custom scrollbar for dropdowns */
+    select::-webkit-scrollbar {
+      width: 8px;
+    }
+    select::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container text-center">
+    <h1 class="main-title">
+      <i class="fas fa-cloud-showers-heavy mr-2"></i>GetYourWeather
+    </h1>
+    
+    <div class="card glass-card mx-auto">
+      <div class="card-header-custom">
+        <h5><i class="fas fa-map-marker-alt mr-2"></i>Select Your Location</h5>
+      </div>
+      
+      <div class="card-body text-left">
+        <form id="locationForm">
+          <div class="form-group">
+            <label for="stateSelect">Step 1: Indian State</label>
+            <select class="form-control" id="stateSelect" name="state" onchange="loadCities()" required>
+              <option value="" disabled selected>Loading states...</option>
+            </select>
+          </div>
+          
+          <div class="form-group mt-4">
+            <label for="citySelect">Step 2: Specific City</label>
+            <select class="form-control" id="citySelect" name="city" required disabled>
+              <option value="" disabled selected>Select a state first</option>
+            </select>
+          </div>
+          
+          <div class="mt-5">
+            <button type="button" id="predictBtn" class="btn btn-predict btn-block" onclick="getPrediction()" disabled>
+              Check Rainfall Probability
+            </button>
+          </div>
+        </form>
+
+        <!-- Prediction Result Area (Hidden by default) -->
+        <div id="resultArea" style="display: none;">
+          <div class="card result-card">
+            <div class="result-header">
+              <i class="fas fa-location-dot mr-2"></i><span id="resultLocation">Location</span>
+            </div>
+            <div class="card-body p-4 text-center">
+              <div class="weather-info-box">
+                <div class="weather-item">
+                  <i class="fas fa-temperature-high"></i>
+                  <div>Temp</div>
+                  <div><span id="temp">0</span>°C</div>
+                </div>
+                <div class="weather-item">
+                  <i class="fas fa-droplet"></i>
+                  <div>Humidity</div>
+                  <div><span id="humidity">0</span>%</div>
+                </div>
+              </div>
+
+              <div id="nowcastAlert" class="nowcast-box">
+                <i id="nowcastIcon" class="fas fa-info-circle"></i>
+                <span id="nowcastMsg">Analyzing local data...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <p class="footer-text">
+      Powered by real-time OpenWeatherMap API & ML Insights
+    </p>
+  </div>
+
+  <script>
+    // Configuration for Static Deployment
+    // Since we are deploying to GitHub Pages (Static), we'll use fallback APIs or Mock data
+    // because GitHub Pages doesn't support Flask (Python) backends.
+    
+    const API_KEY = "bd5e378503939ddaee76f12ad7a97608"; // Using your key for direct browser fetch
+
+    // 1. Load states on page load (Using a static list for India)
+    const INDIAN_STATES = [
+      "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", 
+      "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", 
+      "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", 
+      "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", 
+      "Uttarakhand", "West Bengal", "Delhi"
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const stateSelect = document.getElementById('stateSelect');
+      stateSelect.innerHTML = '<option value="" disabled selected>Select a state</option>';
+      INDIAN_STATES.sort().forEach(state => {
+        const option = document.createElement('option');
+        option.value = state;
+        option.textContent = state;
+        stateSelect.appendChild(option);
+      });
+    });
+
+    // 2. Load cities (Using CountriesNow direct API for static sites)
+    async function loadCities() {
+      const stateSelect = document.getElementById('stateSelect');
+      const citySelect = document.getElementById('citySelect');
+      const predictBtn = document.getElementById('predictBtn');
+      const state = stateSelect.value;
+      
+      if (!state) return;
+      
+      citySelect.disabled = true;
+      citySelect.innerHTML = '<option value="" disabled selected>Loading cities...</option>';
+      
+      try {
+        const response = await fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ country: "India", state: state })
+        });
+        const data = await response.json();
+        
+        citySelect.innerHTML = '<option value="" disabled selected>Select a city</option>';
+        if (!data.error) {
+          data.data.sort().forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+          });
+          citySelect.disabled = false;
+          predictBtn.disabled = false;
+        } else {
+          throw new Error("API Error");
+        }
+      } catch (error) {
+        citySelect.innerHTML = '<option value="" disabled selected>Error loading cities</option>';
+      }
+    }
+
+    // 3. Get Prediction (Directly via OpenWeatherMap API for static site)
+    async function getPrediction() {
+      const state = document.getElementById('stateSelect').value;
+      const city = document.getElementById('citySelect').value;
+      const resultArea = document.getElementById('resultArea');
+      const predictBtn = document.getElementById('predictBtn');
+      
+      if (!state || !city) return;
+      
+      predictBtn.disabled = true;
+      predictBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Fetching Live Weather...';
+      
+      try {
+        // Fetch real weather directly from OpenWeatherMap
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},IN&appid=${API_KEY}&units=metric`);
+        const data = await response.json();
+        
+        if (data.cod === 200) {
+          document.getElementById('resultLocation').textContent = `${data.name}, ${state}`;
+          document.getElementById('temp').textContent = Math.round(data.main.temp);
+          document.getElementById('humidity').textContent = data.main.humidity;
+          
+          const nowcastAlert = document.getElementById('nowcastAlert');
+          const nowcastMsg = document.getElementById('nowcastMsg');
+          const nowcastIcon = document.getElementById('nowcastIcon');
+          
+          // Heuristic Nowcast Logic (Since ML model is backend-only)
+          let intensity = "Dry";
+          let message = "Conditions are clear and dry.";
+          
+          const hum = data.main.humidity;
+          const clouds = data.clouds.all;
+          
+          if (hum > 85 && clouds > 80) {
+            intensity = "Heavy Rain";
+            message = "High probability of heavy rainfall soon.";
+            nowcastAlert.style.background = "#fff0f0";
+            nowcastAlert.style.color = "#d93025";
+            nowcastIcon.className = "fas fa-cloud-showers-heavy";
+          } else if (hum > 70 || clouds > 60) {
+            intensity = "Moderate Rain";
+            message = "Overcast skies with moderate rain chances.";
+            nowcastAlert.style.background = "#fff8e1";
+            nowcastAlert.style.color = "#f57f17";
+            nowcastIcon.className = "fas fa-cloud-rain";
+          } else {
+            nowcastAlert.style.background = "#e6f4ea";
+            nowcastAlert.style.color = "#1e8e3e";
+            nowcastIcon.className = "fas fa-sun";
+          }
+          
+          nowcastMsg.textContent = message;
+          resultArea.style.display = "block";
+          resultArea.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          alert("City not found or API error.");
+        }
+      } catch (error) {
+        alert("Network error. Please try again.");
+      } finally {
+        predictBtn.disabled = false;
+        predictBtn.innerHTML = 'Check Rainfall Probability';
+      }
+    }
+  </script>
+</body>
+
+</html>
