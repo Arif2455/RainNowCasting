@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Rainfall-Prediction</title>
+</head>
+<body style="background-image: url('https://imgur.com/BAGXL6M.jpg')">
+    <div class="container">
+    <h1 class="text-center m-3 badge-primary text-wrap">{{ Subdivision }} rainfall Prediction</h1>
+        <div class="card container" style="width: 50%;">
+            <div class="card-body">
+                <h5 class="card-title">Prediction vs Actual</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-2 border rounded">
+                            <strong>Predicted</strong>
+                            <div>{{ res }} mm</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-2 border rounded">
+                            <strong>Actual</strong>
+                            <div>
+                                {% if actual is not none %}
+                                    {{ actual|round(2) }} mm
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <strong>Percentage Error:</strong>
+                    <span>
+                        {% if perc_error is not none %}
+                            {{ perc_error }}%
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="mt-3">
+                    <strong>Selected Date/Time:</strong>
+                    <div>
+                        {% if Date %}Date: {{ Date }}{% else %}Date: N/A{% endif %} |
+                        {% if Time %}Time: {{ Time }}{% else %}Time: N/A{% endif %}
+                    </div>
+                </div>
+                {% if actual is none %}
+                <div class="alert alert-info mt-3" role="alert">
+                    Actual value unavailable for selected inputs. Available years for {{ Subdivision }}: 
+                    {% if year_min is not none and year_max is not none %}
+                        {{ year_min }}–{{ year_max }}
+                    {% else %}
+                        unknown
+                    {% endif %}.
+                    Try selecting a year within this range.
+                </div>
+                {% endif %}
+                <div class="mt-4 text-center">
+                    <a href="/nowcast?subdivision={{ Subdivision }}" class="btn btn-success btn-lg">Check Real-Time Nowcast</a>
+                </div>
+                <div class="mt-2 text-center">
+                    <a href="/" class="btn btn-outline-primary">New Prediction</a>
+                </div>
+            </div>
+        </div>  
+
+    </div>
+
+</body>
+</html>

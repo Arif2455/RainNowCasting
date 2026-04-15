@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <title>Rainfall Nowcasting</title>
+</head>
+<body style="background-image: url('https://imgur.com/BAGXL6M.jpg'); background-size: cover;">
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 600px; background: rgba(255, 255, 255, 0.9);">
+            <div class="card-header bg-primary text-white text-center">
+                <h2>Short-Term Nowcasting (Next 3-4 Hours)</h2>
+            </div>
+            <div class="card-body">
+                <h4 class="text-center text-info">{{ subdivision }} Region</h4>
+                <hr>
+                
+                <div class="row text-center mt-3">
+                    <div class="col-6">
+                        <div class="p-2 border rounded bg-light">
+                            <small class="text-muted d-block">Nowcast Probability</small>
+                            <strong class="h4">{{ result.probability }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-2 border rounded bg-light">
+                            <small class="text-muted d-block">Historical RMSE</small>
+                            <strong class="h4 text-danger">{{ rmse }} mm</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-{{ 'danger' if 'Heavy' in result.intensity else 'warning' if 'Moderate' in result.intensity else 'success' }} text-center mt-3">
+                    <p class="lead mb-0">Expected Intensity: <strong>{{ result.intensity }}</strong></p>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Real-Time Parameters for {{ result.parameters.city }}:</h5>
+                    <table class="table table-sm table-striped">
+                        <tr>
+                            <th>Temperature</th>
+                            <td>{{ result.parameters.temp }}°C</td>
+                        </tr>
+                        <tr>
+                            <th>Humidity</th>
+                            <td>{{ result.parameters.humidity }}%</td>
+                        </tr>
+                        <tr>
+                            <th>Pressure</th>
+                            <td>{{ result.parameters.pressure }} hPa</td>
+                        </tr>
+                        <tr>
+                            <th>Wind Speed</th>
+                            <td>{{ result.parameters.wind_speed }} m/s</td>
+                        </tr>
+                        <tr>
+                            <th>Cloud Cover</th>
+                            <td>{{ result.parameters.clouds }}%</td>
+                        </tr>
+                        <tr>
+                            <th>Current Conditions</th>
+                            <td>{{ result.parameters.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Updated</th>
+                            <td>{{ result.parameters.timestamp }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card mt-3 border-info">
+                    <div class="card-body">
+                        <strong>Insight:</strong> {{ result.message }}
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="text-center">Historical Model Performance for {{ subdivision }}</h5>
+                    <div class="text-center">
+                        {% set display_sub = 'VIDARBHA' if subdivision.upper() == 'GETYOURWEATHER' else subdivision %}
+                        {% set safe_sub = display_sub.replace(" & ", "_").replace(" ", "_").upper() %}
+                        <img src="{{ url_for('static', filename='plots/' + safe_sub + '.png') }}" 
+                             class="img-fluid rounded shadow border" 
+                             alt="Model Performance for {{ subdivision }}"
+                             onerror="this.style.display='none'; document.getElementById('plot-error').style.display='block';">
+                        <div id="plot-error" class="alert alert-light mt-2 small" style="display:none;">
+                            Performance visualization for this specific region is being generated.
+                        </div>
+                    </div>
+                    <div class="mt-2 small text-muted">
+                        <p><strong>How to read:</strong> The left graph shows how close predictions are to actual history (diagonal line is perfect). The right graph shows the distribution of errors.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="/" class="btn btn-secondary btn-block">Back to Home</a>
+                </div>
+            </div>
+            <div class="card-footer text-muted text-center">
+                Powered by OpenWeatherMap Real-Time API
+            </div>
+        </div>
+    </div>
+</body>
+</html>

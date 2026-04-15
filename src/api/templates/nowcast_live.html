@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <title>Live Nowcast - Rainfall Prediction</title>
+</head>
+<body style="background-image: url('https://imgur.com/BAGXL6M.jpg'); background-size: cover; background-attachment: fixed;">
+    <div class="container mt-5">
+        <div class="card mx-auto shadow-lg" style="max-width: 800px; background: rgba(255, 255, 255, 0.95);">
+            <div class="card-header bg-info text-white text-center">
+                <h2>Live Real-Time Prediction</h2>
+                <p class="mb-0"><strong>Location:</strong> {{ location }} ({{ subdivision }} Region)</p>
+                <small class="text-white-50">Coordinates: {{ lat|round(4) }}, {{ lon|round(4) }}</small>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Column 1: Short-Term Heuristic -->
+                    <div class="col-md-6 border-right">
+                        <h5 class="text-center text-primary">Immediate Forecast (3-4 Hours)</h5>
+                        <div class="alert alert-{{ 'danger' if 'Heavy' in short_term.intensity else 'warning' if 'Moderate' in short_term.intensity else 'success' }} text-center mt-3">
+                            <h3 class="display-4">{{ short_term.probability }}</h3>
+                            <p class="lead">Chance of {{ short_term.intensity }}</p>
+                        </div>
+                        <div class="small text-muted mt-2">
+                            <strong>Live Params:</strong> {{ weather.temp }}°C, {{ weather.humidity }}% Humidity, {{ weather.pressure }} hPa
+                        </div>
+                    </div>
+
+                    <!-- Column 2: ML Model Prediction -->
+                    <div class="col-md-6">
+                        <h5 class="text-center text-primary">ML Model Estimate (Current Month)</h5>
+                        <div class="p-4 bg-light rounded border text-center mt-3">
+                            <h3 class="display-4 text-info">{{ ml_prediction }} mm</h3>
+                            <p class="lead">Predicted Monthly Total</p>
+                        </div>
+                        <div class="small text-muted mt-2">
+                            <strong>Historical Accuracy:</strong> RMSE {{ rmse }} mm
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="card border-info mb-4">
+                    <div class="card-body py-2">
+                        <strong>Integrated Insight:</strong> {{ short_term.message }}
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="text-center">Historical Performance Graph</h5>
+                    <div class="text-center">
+                        {% set display_sub = 'VIDARBHA' if subdivision.upper() == 'GETYOURWEATHER' else subdivision %}
+                        {% set safe_sub = display_sub.replace(" & ", "_").replace(" ", "_").upper() %}
+                        <img src="{{ url_for('static', filename='plots/' + safe_sub + '.png') }}" 
+                             class="img-fluid rounded shadow-sm border" 
+                             alt="Model Performance">
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="/" class="btn btn-outline-secondary btn-block">Back to Selection</a>
+                </div>
+            </div>
+            <div class="card-footer text-muted text-center small">
+                End-to-End Live Integration: OpenWeatherMap API + Scikit-Learn Model
+            </div>
+        </div>
+    </div>
+</body>
+</html>
