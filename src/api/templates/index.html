@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <title>Rainfall Nowcasting</title>
+  <title>AtmoCast</title>
 </head>
 
 <body style="background-image: url('https://imgur.com/BAGXL6M.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
   <div class="container mt-5">
     <h1 class="text-center m-3 badge-primary text-wrap p-3 rounded">
-      GetYourWeather Real-Time Nowcasting
+      AtmoCast Real-Time Nowcasting
     </h1>
     <div class="card mx-auto shadow-lg" style="max-width: 600px; background: rgba(255, 255, 255, 0.95);">
       <div class="card-body">
@@ -31,7 +31,7 @@
           </div>
           <div class="text-center mt-4">
             <button type="button" id="predictBtn" class="btn btn-primary btn-lg btn-block" onclick="getPrediction()" disabled>
-              Get Real-Time Rainfall Prediction
+              Get Real-Time Weather Prediction
             </button>
           </div>
         </form>
@@ -157,7 +157,7 @@
         alert("Network error. Please try again.");
       } finally {
         predictBtn.disabled = false;
-        predictBtn.textContent = "Get Real-Time Rainfall Prediction";
+        predictBtn.textContent = "Get Real-Time Weather Prediction";
       }
     }
   </script>

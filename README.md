@@ -1,6 +1,6 @@
-# Rainfall-Prediction-end-to-end-ML-project
+# AtmoCast
 
-The main motive of the project is to predict the amount of rainfall in Vidarbha region or state well in advance. We predict average rainfall using past data.
+The main motive of the project is to predict weather and rainfall in Vidarbha region or state well in advance.
 
 ![alt text](static/workFlow.png)
 
