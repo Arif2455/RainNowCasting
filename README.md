@@ -37,11 +37,15 @@ The main motive of the project is to predict weather and rainfall in Vidarbha re
    $env:OPENWEATHER_API_KEY = "your_api_key_here"
    ```
 
-6. **Run the Flask app:**
+6. **Run the Flask app (Production-ready):**
    ```
-   python src/api/app.py
+   python run.py
    ```
    The Flask app will start running, typically on `http://127.0.0.1:5000/`.
+
+## DEPLOYMENT
+
+For instructions on how to host this project on a public URL, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## CONCLUSION
 
