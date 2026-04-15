@@ -5,268 +5,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <title>Rainfall Nowcasting | Real-Time Weather</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-      background-attachment: fixed;
-      min-height: 100vh;
-      color: #333;
-      display: flex;
-      align-items: center;
-      padding: 20px 0;
-    }
-
-    .container {
-      max-width: 700px;
-    }
-
-    .main-title {
-      color: white;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      margin-bottom: 30px;
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 20px;
-      border: none;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .card-header-custom {
-      background: #f8f9fa;
-      border-bottom: 1px solid #eee;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .card-header-custom h5 {
-      margin-bottom: 0;
-      font-weight: 600;
-      color: #1e3c72;
-    }
-
-    .card-body {
-      padding: 40px;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .form-control {
-      border-radius: 12px;
-      padding: 12px 15px;
-      height: auto;
-      border: 2px solid #eef0f5;
-      transition: all 0.3s ease;
-    }
-
-    .form-control:focus {
-      border-color: #2a5298;
-      box-shadow: none;
-      background: #fff;
-    }
-
-    .btn-predict {
-      background: linear-gradient(to right, #1e3c72, #2a5298);
-      border: none;
-      border-radius: 12px;
-      padding: 15px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: white;
-      box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .btn-predict:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
-      background: linear-gradient(to right, #2a5298, #1e3c72);
-      color: white;
-    }
-
-    .btn-predict:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
-    .btn-predict:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    #resultArea {
-      margin-top: 30px;
-      animation: fadeInUp 0.5s ease;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .result-card {
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      background: white;
-    }
-
-    .result-header {
-      background: #1e3c72;
-      color: white;
-      border-radius: 15px 15px 0 0;
-      padding: 15px;
-      font-weight: 600;
-    }
-
-    .weather-info-box {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-      background: #f0f4f8;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .weather-item {
-      text-align: center;
-    }
-
-    .weather-item i {
-      font-size: 1.5rem;
-      color: #2a5298;
-      margin-bottom: 8px;
-    }
-
-    .weather-item div:first-child {
-      font-size: 0.8rem;
-      color: #777;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .weather-item div:last-child {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #333;
-    }
-
-    .nowcast-box {
-      border-radius: 12px;
-      padding: 20px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 15px;
-    }
-
-    .nowcast-box i {
-      font-size: 1.8rem;
-    }
-
-    .footer-text {
-      color: rgba(255, 255, 255, 0.7);
-      margin-top: 20px;
-      font-size: 0.9rem;
-    }
-
-    /* Custom scrollbar for dropdowns */
-    select::-webkit-scrollbar {
-      width: 8px;
-    }
-    select::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 4px;
-    }
-  </style>
+  <title>Rainfall Nowcasting</title>
 </head>
 
-<body>
-  <div class="container text-center">
-    <h1 class="main-title">
-      <i class="fas fa-cloud-showers-heavy mr-2"></i>GetYourWeather
+<body style="background-image: url('https://imgur.com/BAGXL6M.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+  <div class="container mt-5">
+    <h1 class="text-center m-3 badge-primary text-wrap p-3 rounded">
+      GetYourWeather Real-Time Nowcasting
     </h1>
-    
-    <div class="card glass-card mx-auto">
-      <div class="card-header-custom">
-        <h5><i class="fas fa-map-marker-alt mr-2"></i>Select Your Location</h5>
-      </div>
-      
-      <div class="card-body text-left">
+    <div class="card mx-auto shadow-lg" style="max-width: 600px; background: rgba(255, 255, 255, 0.95);">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-4">India State & City Wise Prediction</h5>
         <form id="locationForm">
           <div class="form-group">
-            <label for="stateSelect">Step 1: Indian State</label>
+            <label for="stateSelect">1. Select State</label>
             <select class="form-control" id="stateSelect" name="state" onchange="loadCities()" required>
               <option value="" disabled selected>Loading states...</option>
             </select>
           </div>
-          
-          <div class="form-group mt-4">
-            <label for="citySelect">Step 2: Specific City</label>
+          <div class="form-group mt-3">
+            <label for="citySelect">2. Select City</label>
             <select class="form-control" id="citySelect" name="city" required disabled>
               <option value="" disabled selected>Select a state first</option>
             </select>
           </div>
-          
-          <div class="mt-5">
-            <button type="button" id="predictBtn" class="btn btn-predict btn-block" onclick="getPrediction()" disabled>
-              Check Rainfall Probability
+          <div class="text-center mt-4">
+            <button type="button" id="predictBtn" class="btn btn-primary btn-lg btn-block" onclick="getPrediction()" disabled>
+              Get Real-Time Rainfall Prediction
             </button>
           </div>
         </form>
 
         <!-- Prediction Result Area (Hidden by default) -->
-        <div id="resultArea" style="display: none;">
-          <div class="card result-card">
-            <div class="result-header">
-              <i class="fas fa-location-dot mr-2"></i><span id="resultLocation">Location</span>
+        <div id="resultArea" class="mt-4" style="display: none;">
+          <div class="card border-primary">
+            <div class="card-header bg-primary text-white text-center">
+              <h4 id="resultLocation">Location</h4>
             </div>
-            <div class="card-body p-4 text-center">
-              <div class="weather-info-box">
-                <div class="weather-item">
-                  <i class="fas fa-temperature-high"></i>
-                  <div>Temp</div>
-                  <div><span id="temp">0</span>°C</div>
-                </div>
-                <div class="weather-item">
-                  <i class="fas fa-droplet"></i>
-                  <div>Humidity</div>
-                  <div><span id="humidity">0</span>%</div>
-                </div>
+            <div class="card-body text-center">
+              <div class="alert alert-info py-2 mb-0">
+                <strong>Current:</strong> <span id="temp">0</span>°C, <span id="humidity">0</span>% Humidity
               </div>
-
-              <div id="nowcastAlert" class="nowcast-box">
-                <i id="nowcastIcon" class="fas fa-info-circle"></i>
-                <span id="nowcastMsg">Analyzing local data...</span>
+              <div id="nowcastAlert" class="alert mt-3 py-2">
+                <span id="nowcastMsg">Nowcast Info</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="card-footer text-muted text-center small">
+        Scalable dynamic location system with real-time OpenWeatherMap integration.
+      </div>
     </div>
-    
-    <p class="footer-text">
-      Powered by real-time OpenWeatherMap API & ML Insights
-    </p>
   </div>
 
   <script>
@@ -332,7 +122,7 @@
       if (!state || !city) return;
       
       predictBtn.disabled = true;
-      predictBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Analyzing live data...';
+      predictBtn.textContent = "Fetching real-time data...";
       
       try {
         const response = await fetch('/api/predict', {
@@ -350,24 +140,12 @@
           
           const nowcastAlert = document.getElementById('nowcastAlert');
           const nowcastMsg = document.getElementById('nowcastMsg');
-          const nowcastIcon = document.getElementById('nowcastIcon');
-          
           nowcastMsg.textContent = result.nowcast.message;
           
-          // Style nowcast based on intensity and update icon
-          if (result.nowcast.intensity.includes("Heavy")) {
-            nowcastAlert.style.background = "#fff0f0";
-            nowcastAlert.style.color = "#d93025";
-            nowcastIcon.className = "fas fa-cloud-showers-heavy";
-          } else if (result.nowcast.intensity.includes("Moderate")) {
-            nowcastAlert.style.background = "#fff8e1";
-            nowcastAlert.style.color = "#f57f17";
-            nowcastIcon.className = "fas fa-cloud-rain";
-          } else {
-            nowcastAlert.style.background = "#e6f4ea";
-            nowcastAlert.style.color = "#1e8e3e";
-            nowcastIcon.className = "fas fa-sun";
-          }
+          // Style nowcast based on intensity
+          nowcastAlert.className = "alert mt-3 py-2 " + 
+            (result.nowcast.intensity.includes("Heavy") ? "alert-danger" : 
+             result.nowcast.intensity.includes("Moderate") ? "alert-warning" : "alert-success");
           
           resultArea.style.display = "block";
           resultArea.scrollIntoView({ behavior: 'smooth' });
@@ -379,7 +157,7 @@
         alert("Network error. Please try again.");
       } finally {
         predictBtn.disabled = false;
-        predictBtn.innerHTML = 'Check Rainfall Probability';
+        predictBtn.textContent = "Get Real-Time Rainfall Prediction";
       }
     }
   </script>

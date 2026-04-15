@@ -19,7 +19,7 @@ PLOTS_DIR = os.path.join(STATIC_DIR, 'plots')
 METRICS_PATH = os.path.join(STATIC_DIR, 'metrics.json')
 
 # API Settings
-OPENWEATHER_API_KEY = os.environ.get("OPENWEATHER_API_KEY", "YOUR_API_KEY_HERE")
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "your_api_key_here")
 DEFAULT_CITY = "Nagpur"
 
 # Logging Settings

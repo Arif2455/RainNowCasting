@@ -1,0 +1,67 @@
+2026-04-15 12:00:50,212 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:00:51,401 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:00:51,416 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:03:27,481 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:03:27,514 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:03:28,848 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:03:28,849 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:03:28,861 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:03:37,223 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:03:37,238 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:03:38,552 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:03:38,552 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:03:38,567 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:03:44,953 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:03:44,968 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:03:46,193 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:03:46,193 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:03:46,206 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:04:25,331 - API - INFO - Processing UI Nowcast request for subdivision: GETYOURWEATHER
+2026-04-15 12:04:37,391 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:04:37,438 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:04:39,023 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:04:39,023 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:04:39,036 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:04:51,936 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:04:51,948 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:04:53,331 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:04:53,331 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:04:53,348 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:05:09,140 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:05:09,154 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:05:10,440 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:05:10,440 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:05:10,454 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:05:13,470 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:05:13,484 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:05:14,520 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:05:14,520 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:05:14,534 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:05:19,335 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:05:19,350 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:05:21,606 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:05:21,606 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:05:21,621 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:05:25,163 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:05:25,178 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:05:26,517 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:05:26,517 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:05:26,530 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:05:33,987 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:05:33,999 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:05:35,209 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:05:35,209 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:05:35,223 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:06:15,745 - API - INFO - Processing UI Nowcast request for subdivision: COASTAL KARNATAKA
+2026-04-15 12:06:23,437 - API - INFO - Processing UI Nowcast request for subdivision: ASSAM & MEGHALAYA
+2026-04-15 12:06:45,884 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:06:45,901 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:06:50,910 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:06:50,910 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:06:50,932 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:07:04,931 - API - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl
+2026-04-15 12:07:04,945 - Predictor - INFO - Loading model from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\model.pkl...
+2026-04-15 12:07:12,462 - Predictor - INFO - Model loaded successfully.
+2026-04-15 12:07:12,463 - API - INFO - Loading context datasets for real-time features
+2026-04-15 12:07:12,544 - API - INFO - Historical metrics loaded from C:\Users\aaria\Downloads\Rainfall-Prediction-end-to-end-ML-project-main\Rainfall-Prediction-end-to-end-ML-project-main - Copy\src\api\static\metrics.json
+2026-04-15 12:08:12,768 - API - INFO - Processing UI Nowcast request for subdivision: ASSAM & MEGHALAYA
