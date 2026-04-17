@@ -61,19 +61,11 @@ def get_mock_weather(city):
 def nowcast_rainfall(weather_data):
     """
     Heuristic-based nowcasting for the next 3-4 hours.
-    Rainfall probability increases with:
-    1. High humidity (> 80%)
-    2. Falling pressure (if we had history) or low pressure (< 1005 hPa)
-    3. High cloud cover (> 70%)
-    4. Temperature-humidity index (instability)
+    Returns probability and intensity based on humidity, clouds, and pressure.
     """
-    if not weather_data:
-        return {"probability": "Unknown", "intensity": "N/A", "message": "No data available"}
-    
-    humidity = weather_data["humidity"]
-    clouds = weather_data["clouds"]
-    temp = weather_data["temp"]
-    pressure = weather_data["pressure"]
+    humidity = weather_data.get("humidity", 0)
+    clouds = weather_data.get("clouds", 0)
+    pressure = weather_data.get("pressure", 1013)
     
     score = 0
     if humidity > 85: score += 40

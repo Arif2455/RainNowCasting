@@ -233,10 +233,30 @@ def api_predict():
     
     confidence = "High" if confidence_score > 70 else "Medium" if confidence_score > 40 else "Low"
     
+    # --- Prediction vs Actual Comparison ---
+    predicted_val = round(float(ml_prediction), 2) if ml_prediction else 0
+    actual_val = weather.get("actual_rainfall", 0)
+    
+    error_val = round(abs(predicted_val - actual_val), 2)
+    
+    if error_val <= 2:
+        error_level = "Low error (green)"
+        comparison_msg = "Accurate prediction"
+    elif error_val <= 5:
+        error_level = "Medium error (yellow)"
+        comparison_msg = "Slight overestimation" if predicted_val > actual_val else "Underestimation"
+    else:
+        error_level = "High error (red)"
+        comparison_msg = "Overestimation" if predicted_val > actual_val else "Underestimation"
+        
     return jsonify({
         "location": city,
         "state": state,
-        "prediction_mm": round(float(ml_prediction), 2) if ml_prediction else 0,
+        "prediction_mm": predicted_val,
+        "actual_mm": actual_val,
+        "error_mm": error_val,
+        "error_level": error_level,
+        "comparison_message": comparison_msg,
         "confidence": confidence,
         "temperature": weather['temp'],
         "humidity": weather['humidity'],
@@ -305,12 +325,36 @@ def nowcast_live():
     
     rmse = SUBDIVISION_METRICS.get(subdivision.upper(), "N/A")
     
+    # --- Prediction vs Actual Comparison ---
+    predicted_val = round(float(ml_prediction), 2) if ml_prediction else 0
+    actual_val = weather.get("actual_rainfall", 0)
+    
+    error_val = round(abs(predicted_val - actual_val), 2)
+    
+    if error_val <= 2:
+        error_level = "Low error (green)"
+        comparison_msg = "Accurate prediction"
+        badge_class = "success"
+    elif error_val <= 5:
+        error_level = "Medium error (yellow)"
+        comparison_msg = "Slight overestimation" if predicted_val > actual_val else "Underestimation"
+        badge_class = "warning"
+    else:
+        error_level = "High error (red)"
+        comparison_msg = "Overestimation" if predicted_val > actual_val else "Underestimation"
+        badge_class = "danger"
+    
     return render_template('nowcast_live.html', 
                            subdivision=subdivision,
                            location=search_name,
                            weather=weather,
                            short_term=short_term,
-                           ml_prediction=round(ml_prediction, 2) if ml_prediction else "N/A",
+                           ml_prediction=predicted_val,
+                           actual_mm=actual_val,
+                           error_mm=error_val,
+                           error_level=error_level,
+                           comparison_message=comparison_msg,
+                           badge_class=badge_class,
                            rmse=rmse,
                            lat=lat,
                            lon=lon)

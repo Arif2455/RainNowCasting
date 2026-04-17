@@ -73,6 +73,7 @@ def get_weather_data(city_name):
                 "pressure": main.get("pressure", 0),
                 "wind_speed": wind.get("speed", 0),
                 "clouds": clouds.get("all", 0),
+                "actual_rainfall": data.get("rain", {}).get("1h", 0), # Get actual 1hr rainfall if available
                 "description": weather.get("description", "N/A").capitalize(),
                 "city": data.get("name", city_name),
                 "lat": coord.get("lat", 0),
@@ -101,6 +102,7 @@ def get_weather_data(city_name):
                     "pressure": main.get("pressure", 0),
                     "wind_speed": wind.get("speed", 0),
                     "clouds": clouds.get("all", 0),
+                    "actual_rainfall": data.get("rain", {}).get("1h", 0), # Get actual 1hr rainfall if available
                     "description": weather.get("description", "N/A").capitalize(),
                     "city": data.get("name", city_name),
                     "lat": coord.get("lat", 0),
@@ -138,6 +140,7 @@ def get_mock_weather(city):
         "pressure": random.randint(1000, 1015),
         "wind_speed": random.uniform(2.0, 15.0),
         "clouds": random.randint(0, 100),
+        "actual_rainfall": round(random.uniform(0, 10), 2) if random.random() > 0.7 else 0, # 30% chance of mock rain
         "description": random.choice(["Clear sky", "Haze", "Partly cloudy", "Broken clouds", "Light rain"]),
         "city": city + " (Demo)",
         "lat": 20.0, # Dummy

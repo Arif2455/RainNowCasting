@@ -49,6 +49,18 @@
               <div id="nowcastAlert" class="alert mt-3 py-2">
                 <span id="nowcastMsg">Nowcast Info</span>
               </div>
+              <div class="mt-3 text-left">
+                <h6>Prediction vs Actual Comparison</h6>
+                <div class="d-flex justify-content-between">
+                  <span><strong>Predicted:</strong> <span id="predVal">0</span> mm</span>
+                  <span><strong>Actual (1hr):</strong> <span id="actualVal">0</span> mm</span>
+                </div>
+                <div class="mt-2">
+                  <strong>Error:</strong> <span id="errorVal">0</span> mm
+                  <span id="errorBadge" class="badge ml-2">Unknown</span>
+                </div>
+                <div class="text-muted small mt-1" id="comparisonMsg"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -137,6 +149,24 @@
           document.getElementById('resultLocation').textContent = `${result.location}, ${result.state}`;
           document.getElementById('temp').textContent = result.temperature;
           document.getElementById('humidity').textContent = result.humidity;
+          
+          // Populate comparison fields
+          document.getElementById('predVal').textContent = result.prediction_mm;
+          document.getElementById('actualVal').textContent = result.actual_mm;
+          document.getElementById('errorVal').textContent = result.error_mm;
+          document.getElementById('comparisonMsg').textContent = result.comparison_message;
+          
+          const badge = document.getElementById('errorBadge');
+          if (result.error_level.includes("Low")) {
+            badge.className = "badge badge-success ml-2";
+            badge.textContent = "Low Error";
+          } else if (result.error_level.includes("Medium")) {
+            badge.className = "badge badge-warning ml-2";
+            badge.textContent = "Medium Error";
+          } else {
+            badge.className = "badge badge-danger ml-2";
+            badge.textContent = "High Error";
+          }
           
           const nowcastAlert = document.getElementById('nowcastAlert');
           const nowcastMsg = document.getElementById('nowcastMsg');
