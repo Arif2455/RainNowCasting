@@ -61,6 +61,11 @@
                 </div>
                 <div class="text-muted small mt-1" id="comparisonMsg"></div>
               </div>
+              <hr>
+              <div class="mt-2 text-left">
+                <h6 class="text-info">Why this prediction?</h6>
+                <p class="small text-muted mb-0" id="explanationMsg"></p>
+              </div>
             </div>
           </div>
         </div>
@@ -155,6 +160,7 @@
           document.getElementById('actualVal').textContent = result.actual_mm;
           document.getElementById('errorVal').textContent = result.error_mm;
           document.getElementById('comparisonMsg').textContent = result.comparison_message;
+          document.getElementById('explanationMsg').textContent = result.explanation;
           
           const badge = document.getElementById('errorBadge');
           if (result.error_level.includes("Low")) {

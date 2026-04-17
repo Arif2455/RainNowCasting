@@ -58,6 +58,46 @@ def get_mock_weather(city):
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
 
+def generate_explanation(weather_data):
+    """
+    Generates a human-readable explanation of why rain is or isn't likely
+    based on the current weather features (humidity, pressure, temp).
+    """
+    humidity = weather_data.get("humidity", 0)
+    pressure = weather_data.get("pressure", 1013)
+    temp = weather_data.get("temp", 0)
+    
+    reasons = []
+    
+    # Humidity Rule
+    if humidity > 70:
+        reasons.append("high humidity increases the chance of rain")
+    elif humidity < 40:
+        reasons.append("low humidity makes rain very unlikely")
+        
+    # Pressure Rule
+    if pressure < 1005:
+        reasons.append("low atmospheric pressure indicates unstable weather")
+    elif pressure > 1015:
+        reasons.append("high pressure typically brings clear skies")
+        
+    # Temperature Rule (Heuristic: very high temps reduce immediate rain likelihood unless humidity is also very high)
+    if temp > 38 and humidity < 60:
+        reasons.append("high temperatures are reducing rain likelihood")
+    elif temp < 25 and humidity > 80:
+        reasons.append("cool, moist air is favorable for rain")
+        
+    if not reasons:
+        return "Current conditions are relatively neutral with no strong indicators for or against rain."
+        
+    # Join reasons with commas and 'and' for the last item
+    if len(reasons) == 1:
+        explanation = f"Specifically, {reasons[0]}."
+    else:
+        explanation = f"Specifically, {', '.join(reasons[:-1])}, and {reasons[-1]}."
+        
+    return explanation.capitalize()
+
 def nowcast_rainfall(weather_data):
     """
     Heuristic-based nowcasting for the next 3-4 hours.

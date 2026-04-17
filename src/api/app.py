@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')
 from location_service import get_states, get_cities_by_state, search_city, validate_city
 from weather_service import get_weather_data, map_weather_to_features
 
-from src.utils.nowcast_engine import nowcast_rainfall
+from src.utils.nowcast_engine import nowcast_rainfall, generate_explanation
 from src.utils.geocoding import get_location_features
 from src.models.predictor import RainfallPredictor
 from src.data.data_loader import load_and_merge_data, get_recent_context
@@ -249,6 +249,8 @@ def api_predict():
         error_level = "High error (red)"
         comparison_msg = "Overestimation" if predicted_val > actual_val else "Underestimation"
         
+    explanation = generate_explanation(weather)
+        
     return jsonify({
         "location": city,
         "state": state,
@@ -257,6 +259,7 @@ def api_predict():
         "error_mm": error_val,
         "error_level": error_level,
         "comparison_message": comparison_msg,
+        "explanation": explanation,
         "confidence": confidence,
         "temperature": weather['temp'],
         "humidity": weather['humidity'],
@@ -344,6 +347,8 @@ def nowcast_live():
         comparison_msg = "Overestimation" if predicted_val > actual_val else "Underestimation"
         badge_class = "danger"
     
+    explanation = generate_explanation(weather)
+    
     return render_template('nowcast_live.html', 
                            subdivision=subdivision,
                            location=search_name,
@@ -355,6 +360,7 @@ def nowcast_live():
                            error_level=error_level,
                            comparison_message=comparison_msg,
                            badge_class=badge_class,
+                           explanation=explanation,
                            rmse=rmse,
                            lat=lat,
                            lon=lon)
